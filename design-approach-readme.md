@@ -5,7 +5,7 @@
 
 ### Tooling
 1. Keep ETL processing completely out of Redshift. This allows for massive scalability without expensive redshift usage. 
-2. Use AWS Glue for all ETL processing which allows for more robust validations and anomaly detection processes before copying data to Redshift.Also Athena is a great way for data anlysis on tables built and stood up by Hive/Presto pipelines.
+2. Use AWS Glue even while using EMRs which allows for more robust validations and anomaly detection processes before copying data to Redshift. Also Athena is a great way for data anlysis on tables built and stood up by Hive/Presto pipelines.
 3. Copy only the final target metrics tables to Redshift - The row count of these tables will be far less than indidvidual player level ratings tables and so will save disk space.
 
 ### Other Design Considerations : S3 partioning for Hive tables
