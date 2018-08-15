@@ -1,7 +1,7 @@
 
 ## Design Approach, Assumptions and Considerations
 
-### Notes: Bash script has not been included to run the hive script. Redshift table DDLs and copy statements are not included. The logic to create metrics has been included.
+### Notes: Bash script has not been included to run the hive script. Redshift table DDLs and copy statements are not included. The logic to create metrics has been included  (hive_script.hql).
 
 ### Tooling
 1. Keep ETL processing completely out of Redshift. This allows for massive scalability without expensive redshift usage. 
