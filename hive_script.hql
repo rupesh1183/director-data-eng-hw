@@ -1,6 +1,6 @@
 --============Step 0 : Create external glue schema ========================================================================
 
-create schema ratings location 's3://<bucket>/ratings/';
+create schema ratings location 's3://hinge-homework/ratings/';
 
 --============Step 1 : Create an external table that encompasses all date partitions containing daily ratings files========
 --=========================================================================================================================
@@ -14,7 +14,7 @@ PARTITIONED BY (year int, month int, day date)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE
-LOCATION 's3://<bucket>/ratings/player_subject_ratings/';
+LOCATION 's3://hinge-homework/ratings/player_subject_ratings/';
 
 --============Step 2 : Create MANAGED table that only spans across the daily partition for the daily ratings file==========
 --=========================================================================================================================
@@ -33,7 +33,7 @@ ratings_type integer)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE
-LOCATION 's3://<bucket>/ratings/player_subject_ratings/year={year_value}/month={month_value}/day={date_value}/'; ---
+LOCATION 's3://hinge-homework/ratings/player_subject_ratings/year={year_value}/month={month_value}/day={date_value}/'; ---
 
 --=== In the above CREATE TABLE step, the {date_value},{month_value} and {year_value} are to be passed as a parameter from the python/unix wrapper.
 
@@ -47,7 +47,7 @@ meaning string)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 's3://<bucket>/ratings/ratings_type/';   ---=====corresponds to the s3 location holding csv file for ratings_type meanings
+LOCATION 's3://hinge-homework/ratings/ratings_type/';   ---=====corresponds to the s3 location holding csv file for ratings_type meanings
 
 
 
@@ -67,7 +67,7 @@ PARTITIONED BY (year int, month int, day date)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE
-LOCATION 's3://<bucket>/ratings/player_subject_interaction_snapshot/';
+LOCATION 's3://hinge-homework/ratings/player_subject_interaction_snapshot/';
 
 --============Step 5 : Create MANAGED table to hold subject/player interactions===============================================
 --===============Assign an interaction ID to tie subject/player and player/subject interactions ==============================
@@ -84,7 +84,7 @@ unique_interaction_id string)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE
-LOCATION 's3://<bucket>/ratings/player_subject_interaction_snapshot/year={year_value}/month={month_value}/day={date_value}/';
+LOCATION 's3://hinge-homework/ratings/player_subject_interaction_snapshot/year={year_value}/month={month_value}/day={date_value}/';
 
 
 --============Step 6 :  CREATE MOST CURRENT SNAPSHOT OF ALL PLAYER SUBJECT INTERCATIONS in the DAILY PARTITION================
@@ -134,7 +134,7 @@ load_ts timestamp)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 's3://<bucket>/ratings/dim_metric/'; 
+LOCATION 's3://hinge-homework/ratings/dim_metric/'; 
 
 
 
@@ -160,7 +160,7 @@ responded_interactions_percentage float)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE
-LOCATION 's3://<bucket>/ratings/daily_ratings_metrics/';
+LOCATION 's3://hinge-homework/ratings/daily_ratings_metrics/';
 
 
 --============Step 9 : Create table to hold daily ratings metrics============================================================
@@ -185,7 +185,7 @@ responded_interactions_percentage float)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE
-LOCATION 's3://<bucket>/ratings/daily_ratings_metrics/year={year_value}/month={month_value}/day={date_value}/';
+LOCATION 's3://hinge-homework/ratings/daily_ratings_metrics/year={year_value}/month={month_value}/day={date_value}/';
 
 
 
@@ -280,7 +280,7 @@ PARTITIONED BY (year int, month int, day date)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE
-LOCATION 's3://<bucket>/ratings/monthly_interaction_metrics/';
+LOCATION 's3://hinge-homework/ratings/monthly_interaction_metrics/';
 
 
 --============Step 13 : Create table to hold monthly_interaction_metrics============================================================
@@ -294,7 +294,7 @@ metric_value float)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE
-LOCATION 's3://<bucket>/ratings/monthly_interaction_metrics/year={year_value}/month={month_value}/day={date_value}/';
+LOCATION 's3://hinge-homework/ratings/monthly_interaction_metrics/year={year_value}/month={month_value}/day={date_value}/';
 
 
 --============Step 14 : INSERT INTO monthly_interaction_metrics============================================================
