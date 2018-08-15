@@ -3,6 +3,11 @@
 
 ### Notes: Bash script has not been included to run the hive script. Redshift table DDLs and copy statements are not included. The logic to create metrics has been included  (hive_script.hql).
 
+### Running the hive script
+1. Its not as straight forward as running the script through a 'hive -f' or a 'hive --conf' (for parameters) bash operator.
+2. Ideally the script will be divided into ddl and hql and ddl is run first and then the hql
+3. Python or the bash wrapper will pass the following parameters while invoking the hive hql script - {year_value},{month_value} & {date_value}
+
 ### Tooling
 1. Keep ETL processing completely out of Redshift. This allows for massive scalability without expensive redshift usage. 
 2. Use AWS Glue even while using EMRs which allows for more robust validations and anomaly detection processes before copying data to Redshift. Also Athena is a great way for data anlysis on tables built and stood up by Hive/Presto pipelines.
@@ -25,7 +30,4 @@
 ### Possible additional analysis
 1. Table created in Step 6 which holds the most recent snapshot of all interactions (Ratings and response) between player and subject could be used to create a metric such as average_duration of an interaction - in other words what is the average duration of the association between a subject and player.
 
-### Running the hive script
-1. Its not as straight forward as running the script through a 'hive -f' or a 'hive --conf' (for parameters) bash operator.
-2. Ideally the script will be divided into ddl and hql and ddl is run first and then the hql
-3. Python or the bash wrapper will pass the following parameters while invoking the hive hql script - {year_value},{month_value} & {date_value}
+
