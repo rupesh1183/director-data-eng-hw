@@ -1,6 +1,5 @@
-# Design Approach, Assumptions and Considerations
 
-## Design Considerations and Tooling
+## Design Approach, Assumptions and Considerations
 
 ### Notes: Bash script has not been included to run the hive script. Redshift table DDLs and copy statements are not included. The logic to create metrics has been included.
 
