@@ -9,12 +9,16 @@
 3. Copy only the final target metrics tables to Redshift - The row count of these tables will be far less than indidvidual player level ratings tables and so will save disk space.
 
 ### Other Design Considerations : S3 partioning for Hive tables
-1. Use External table which year/month/day partitions which allows for better performance tuning using partioned processing of data
-2. Use managed tables for individual date partitions which can be dopped and recreated if process needs to re run for the day
+1. Use External tables with year/month/day partitions which allows for better performance tuning using partioned processing of data.
+2. Use managed tables for individual date partitions which can be dropped and recreated if process needs to re run for the day
 3. Using s3 folders as tables also removes dependencies on file names as the Hive table is agnostic of file names.
 4. It was **interesting** to note how the homework readme file suggested to create separate tables for each of the date part files on S3 - Remains to be seen as to why this was a requirement - nevertheless if we ever want to track which s3 file parts the ratings/interactions belonged too - this can be easily achieved by using the built in Hive column available table which is **INPUT__FILE__NAME** - This can be stored on the tables holding processed data to help store source file part name.
 
 ### Method to tie interactions
 1. Step 6 of the Hive script suggests of an approach to tie historical interactions (which have a player rating and a subject response) together by assigning a unique interaction id
 2. Step 6 essentially allows for data to be partitioned using the unique_interaction_id and then complex rating types such as remove vs reject vs block can be assigned/inferred by ordering the records using timestamp
+
+### Logic to hold daily ratings metrics
+1. Step 10 of the hive script proposes an approach to store various metrics at a daily time grain.
+2. These daily metrics can be averaged each month for average metrics.
 
