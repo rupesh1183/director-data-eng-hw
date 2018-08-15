@@ -22,3 +22,5 @@
 1. Step 10 of the hive script proposes an approach to store various metrics at a daily time grain.
 2. These daily metrics can be averaged each month for average metrics.
 
+### Possible additional analysis
+1. Table created in Step 6 which holds the most recent snapshot of all interactions (Ratings and response) between player and subject could be used to create a metric such as average_duration of an interaction - in other words what is the average duration an association between a subject and player lasted.
